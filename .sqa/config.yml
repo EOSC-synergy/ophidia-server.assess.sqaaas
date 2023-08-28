@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/OphidiaBigData/ophidia-server:
+      branch: master
+      repo: https://github.com/OphidiaBigData/ophidia-server
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/OphidiaBigData/ophidia-server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-peach-cow.sh
+        container: qc.acc_whiny-buff-dhole
+  QC.Doc:
+    repos:
+      github.com/OphidiaBigData/ophidia-server find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-flax-drever.sh
+        container: qc.doc_homey-persimmon-gopher
+      github.com/OphidiaBigData/ophidia-server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-cinnamon-tamarin.sh
+        container: qc.doc_geeky-chartreuse-cuttlefish
+      github.com/OphidiaBigData/ophidia-server markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-cinnabar-oriole.sh
+        container: qc.doc_geeky-lemon-panda
+  QC.Lic:
+    repos:
+      github.com/OphidiaBigData/ophidia-server licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-amber-mammoth.sh
+        container: qc.lic_shaky-fuchsia-quoll
+  QC.Ver:
+    repos:
+      github.com/OphidiaBigData/ophidia-server get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-yellow-jaguar.sh
+        container: qc.ver_crappy-eggplant-butterfly
+timeout: 5400
